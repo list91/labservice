@@ -3,7 +3,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-// import { Item } from './path-to-your-item.entity'; // Путь к вашей сущности Item
+import { Item } from 'src/item.entity'; // Путь к вашей сущности Item
 
 @Injectable()
 export class DeleteItemsService {
