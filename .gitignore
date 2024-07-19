@@ -54,3 +54,35 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+
+# Игнорирование неотслеживаемых файлов и каталогов
+CachedProfilesData/
+Network\ Persistent\ State
+TransportSecurity
+User/
+# src/entities/
+# src/migration/
+
+# Игнорирование временных файлов и каталогов
+node_modules/
+dist/
+*.log
+*.tmp
+
+# Игнорирование локальных настроек и конфиденциальных данных
+.env
+*.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+
+# Игнорирование системных файлов
+.DS_Store
+Thumbs.db
+
+# Дополнительные расширения и шаблоны файлов, которые следует игнорировать
+*.swp
+*.bak
+*.zip
