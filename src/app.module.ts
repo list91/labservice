@@ -6,6 +6,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { MigrationService } from './migration/migration.service';
 import { Sections } from './entities/sections.entity'; // Adjust the path as per your project structure
+import { Grades } from './entities/grades.entity';
+import { Locations } from './entities/locations.entity';
+import { Types } from './entities/types.entity';
 
 @Module({
   imports: [
@@ -16,8 +19,9 @@ import { Sections } from './entities/sections.entity'; // Adjust the path as per
       username: 'admin',
       password: 'admin',
       database: 'laborant',
-      entities: [Sections],
+      entities: [Sections, Grades, Locations, Types],
       synchronize: true,
+      
     }),
     TypeOrmModule.forFeature([Sections]), // Ensure Sections entity is registered
   ],
