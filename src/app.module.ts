@@ -9,6 +9,7 @@ import { Sections } from './entities/sections.entity'; // Adjust the path as per
 import { Grades } from './entities/grades.entity';
 import { Locations } from './entities/locations.entity';
 import { Types } from './entities/types.entity';
+import { RepositoriesFactory } from './repositories.factory';
 
 @Module({
   imports: [
@@ -23,9 +24,9 @@ import { Types } from './entities/types.entity';
       synchronize: true,
       
     }),
-    TypeOrmModule.forFeature([Sections]), // Ensure Sections entity is registered
+    TypeOrmModule.forFeature([Sections]),
   ],
   controllers: [AppController],
-  providers: [AppService, MigrationService],
+  providers: [AppService, MigrationService, RepositoriesFactory],
 })
 export class AppModule {}

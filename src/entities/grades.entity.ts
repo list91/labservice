@@ -10,9 +10,4 @@ export class Grades {
   @Column()
   grade_num: number;
 
-//   @Column()
-//   lastName: string;
-
-//   @Column({ default: true })
-//   isActive: boolean;
 }
