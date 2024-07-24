@@ -8,7 +8,7 @@ export class Locations {
   id: number;
 
   @Column()
-  name: string;
+  locationName: string;
 
 //   @Column()
 //   lastName: string;

@@ -8,7 +8,7 @@ export class Sections {
   id: number;
 
   @Column()
-  name: string;
+  sectionName: string;
 
 //   @Column()
 //   lastName: string;

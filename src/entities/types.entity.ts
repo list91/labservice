@@ -8,7 +8,7 @@ export class Types {
   id: number;
 
   @Column()
-  name: string;
+  typeName: string;
 
 //   @Column()
 //   lastName: string;
