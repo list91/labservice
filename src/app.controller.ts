@@ -50,7 +50,56 @@ export class AppController {
     const newLabItem = labItemsRepository.create(body);
     return await labItemsRepository.save(newLabItem);
   }
+
+  @Post('create_item')
+  async createItem(@Body() body: LabItems): Promise<LabItems> {
+    const labItemsRepository = this.a.getRepository<LabItems>("LabItems");
+    // console.log(body);
+    // const newLabItem = labItemsRepository.create(
+    //   {
+    //     time: '2024-07-24 14:30:00',
+    //     name: '2vrfsr',
+    //     type_item: { type_name: 'тип1' },
+    //     section: { section_name: 'test section2' },
+    //     grade_num: { grade_num: 2 },
+    //     count: 3,
+    //     crash_count: 1,
+    //     img: 'img/qq.png',
+    //     document_item: 'docs/lsadj.pdf',
+    //     location_item: { location_name: 'л2п' }
+    //   }
+    // ); 
+    // const newLabItem = labItemsRepository.create(
+    //   {
+    //     time: '2024-07-24 14:30:00',
+    //     name: 'lab item 1',
+    //     type_item: { type_name: 'тип1' },
+    //     section: { section_name: 'test section' },
+    //     grade_num: { grade_num: 2 },
+    //     count: 3,
+    //     crash_count: 1,
+    //     img: 'img/qq.png',
+    //     document_item: 'docs/lsadj.pdf',
+    //     location_item: { location_name: 'л2п' }
+    //   }
+    // );
+    const newLabItem = labItemsRepository.create(body);
+    return await labItemsRepository.save(newLabItem);
+  }
 }
 // curl http://localhost:300-X POST http://localhost:3000/create_section -H "Content-Type: application/json" -d '{
 //   "sectionName": "test section2"
+// }'
+
+// curl http://localhost:300-X POST http://localhost:3000/create_item -H "Content-Type: application/json" -d '{
+//   "time": "2024-07-24 14:30:00",
+//   "name": "lab item 1",
+//   "type_item": "тип1",
+//   "section": "test section",
+//   "grade_num": "2",
+//   "count": "3",
+//   "crash_count": "1",
+//   "img": "img/qq.png",
+//   "document_item": "docs/lsadj.pdf",
+//   "location_item": "л2п"
 // }'

@@ -8,10 +8,11 @@ export class Types {
   id: number;
 
   @Column()
-  typeName: string;
+  type_name: string;
 
 //   @Column()
 //   lastName: string;
+
 
 //   @Column({ default: true })
 //   isActive: boolean;

@@ -1,5 +1,16 @@
 // user.entity.ts
-
+// curl http://localhost:300-X POST http://localhost:3000/create_item -H "Content-Type: application/json" -d '{
+//   "time": "2024-07-24 14:30:00",
+//   "name": "lab item 1",
+//   "type_item": "тип1",
+//   "section": "test section",
+//   "grade_num": "2",
+//   "count": "3",
+//   "crash_count": "1",
+//   "img": "img/qq.png",
+//   "document_item": "docs/lsadj.pdf",
+//   "location_item": "л2п"
+// }'
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { Types } from './types.entity';
 import { Sections } from './sections.entity';
@@ -11,21 +22,24 @@ export class LabItems {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'timestamp'})
-  time: Date;
+  // @ManyToOne(() => Grades,(Grades) => Grades.grade_num, { cascade: true })
+
+  // @Column({ type: 'timestamp'})
+  @Column()
+  time: string;
 
   @Column()
-  name: string;
+  name: string; 
 
-  @ManyToOne(()=>Types)
-  @JoinColumn({name:'typeName'})
-  typeItem: Types;
+  @ManyToOne(()=>Types,(Types) => Types.type_name, { cascade: true })
+  @JoinColumn({name:'type_name'})
+  type_item: Types;
 
-  @ManyToOne(()=>Sections)
-  @JoinColumn({name:'sectionName'})
+  @ManyToOne(()=>Sections, (Sections) => Sections.section_name, { cascade: true })
+  @JoinColumn({name:'section_name'})
   section: Sections;
 
-  @ManyToOne(()=>Grades)
+  @ManyToOne(()=>Grades, (Grades) => Grades.grade_num, { cascade: true })
   @JoinColumn({name:'grade_num'})
   grade_num: Grades;
 
@@ -33,7 +47,7 @@ export class LabItems {
   count: number;
 
   @Column()
-  crashCount: number;
+  crash_count: number;
 
 //   @Column()
 //   img: number;
@@ -42,9 +56,10 @@ export class LabItems {
   img: string;
 
   @Column()
-  documentItem: string;
+  document_item: string;
 
-  @ManyToOne(()=>Locations)
-  @JoinColumn({name:'locationName'})
-  locationItem: Locations;
+  @ManyToOne(()=>Locations, (Locations) => Locations.location_name, { cascade: true })
+  @JoinColumn({name:'location_name'})
+  location_item: Locations;
 }
+
