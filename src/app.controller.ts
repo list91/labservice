@@ -16,6 +16,7 @@ interface RequestBody {
 import { FilesInterceptor } from '@nestjs/platform-express';
 
 import * as multer from 'multer';
+import { FileService } from './file/file.service';
 
 
 const upload = multer({ dest: 'uploads/' }); // Папка, куда сохранять загруженные файлы
@@ -27,6 +28,7 @@ export class AppController {
   constructor(
               private readonly appService: AppService,
               private readonly a: RepositoriesFactory,
+              private readonly fService: FileService
   ) {}
 
   @Get()
@@ -69,10 +71,12 @@ export class AppController {
   @UseInterceptors(FilesInterceptor('files'))
   async createItem(@UploadedFiles() files, @UploadedFile() file, @Body() body: any): Promise<any> {
     console.log(files); // Загруженные файлы
-    console.log(file); // Один файл, если отправляется только один файл
-    console.log(body); // Другие данные из запроса
-    return 'Files uploaded successfully';
+    // console.log(file); // Один файл, если отправляется только один файл
+    // console.log(body); // Другие данные из запроса
 
+    // return 'Files uploaded successfully';
+    const savedFileNames = await this.fService.saveFiles(files);
+    return savedFileNames;
   }
   // curl -X POST http://localhost:3000/create_item \
   // -F 'time=2024-07-24 14:30:00' \

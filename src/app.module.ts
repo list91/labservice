@@ -11,6 +11,7 @@ import { Locations } from './entities/locations.entity';
 import { Types } from './entities/types.entity';
 import { RepositoriesFactory } from './repositories.factory';
 import { LabItems } from './entities/labitems.entity';
+import { FileService } from './file/file.service';
 
 @Module({
   imports: [
@@ -28,6 +29,6 @@ import { LabItems } from './entities/labitems.entity';
     TypeOrmModule.forFeature([Sections]),
   ],
   controllers: [AppController],
-  providers: [AppService, RepositoriesFactory],
+  providers: [AppService, RepositoriesFactory, FileService],
 })
 export class AppModule {}
