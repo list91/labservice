@@ -12,8 +12,8 @@ curl -X POST http://localhost:3000/create_item -H "Content-Type: application/jso
   },
   "count": 3,
   "crash_count": 1,
-  "img": "img/qq.png",
-  "document_item": "docs/lsadj.pdf",
+  "img": "/home/user/link-preview.svg",
+  "document_item": "/home/user/Загрузки/Telegram Desktop/ШУ Алтай/РЭ УС серии Алтай.pdf",
   "location_item": {
     "location_name": "л2п"
   }
