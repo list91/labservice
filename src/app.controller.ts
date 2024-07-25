@@ -11,12 +11,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import * as multer from 'multer';
 import { FileService } from './file/file.service';
+import { EntityMetadata, Like } from 'typeorm';
 
 interface RequestBody {
   type: string;
 }
 
-const upload = multer({ dest: 'uploads/' }); // Папка, куда сохранять загруженные файлы
+const upload = multer({ dest: 'uploads/' });
 @Controller()
 export class AppController {
   constructor(
@@ -39,6 +40,18 @@ export class AppController {
       return "err request"
     }
   }
+  @Post('search/:table')
+  async search(@Body() searchParams: any, @Param('table') table: string): Promise<any> {
+    const repository = this.a.getRepository(table);
+    const searchQuery: { [key: string]: any } = {};
+    Object.keys(searchParams).forEach(key => {
+      if (searchParams[key]) {
+        searchQuery[key] = Like(`%${searchParams[key]}%`);
+      }
+    });
+    const results = await repository.find({ where: searchQuery });
+    return results;
+  }
 
   @Post('create_location')
   async createLocation(@Body() body: Locations): Promise<Locations> {
@@ -58,15 +71,18 @@ export class AppController {
     return await labItemsRepository.save(newLabItem);    
   }
 
-  @Delete(':id')
-  async deleteLabItem(@Param('id') id: number) {
-    const qq = this.a.getRepository<LabItems>("LabItems");
+  @Delete(':tableName/:id')
+  async deleteLabItem(@Param('tableName') tableName: string, @Param('id') id: number) {
+    const qq = this.a.getRepository<any>(tableName);
     const itemToDelete = await qq.findOne({ where: { id } }); // Находим запись по ID
     if (!itemToDelete) {
-      throw new NotFoundException('Lab item not found');
+      throw new NotFoundException('item not found');
     }
     await qq.remove(itemToDelete); // Удаляем запись
-    this.fService.deleteFiles([itemToDelete.img, itemToDelete.document_item]);
+    if (tableName == "lab_items") {
+      this.fService.deleteFiles([itemToDelete.img, itemToDelete.document_item]);
+    }
     return itemToDelete;
   }
+
 }

@@ -49,14 +49,11 @@ export class LabItems {
   @Column()
   crash_count: number;
 
-//   @Column()
-//   img: number;
+  @Column({ nullable: true })
+  img?: string | null;
 
-  @Column()
-  img: string;
-
-  @Column()
-  document_item: string;
+  @Column({ nullable: true })
+  document_item?: string | null;
 
   @ManyToOne(()=>Locations, (Locations) => Locations.location_name, { cascade: true })
   @JoinColumn({name:'location_name'})
