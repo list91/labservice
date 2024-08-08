@@ -12,6 +12,8 @@ import { Types } from './entities/types.entity';
 import { RepositoriesFactory } from './repositories.factory';
 import { LabItems } from './entities/labitems.entity';
 import { FileService } from './file/file.service';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -27,6 +29,8 @@ import { FileService } from './file/file.service';
       
     }),
     TypeOrmModule.forFeature([Sections]),
+    AuthModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService, RepositoriesFactory, FileService],
