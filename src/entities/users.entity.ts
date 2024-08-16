@@ -11,7 +11,7 @@ export class Users {
   username: string;
 
   @Column()
-  pass: string;
+  password: string;
 
   @Column()
   admin: boolean;
